@@ -9,7 +9,6 @@ import TaskDetail from './components/TaskDetail';
 import Category from "./components/Category"
 import EditTask from './components/EditTask';
 
-
 const appRouter = createBrowserRouter([
   {
     path: "/",
@@ -35,12 +34,11 @@ const appRouter = createBrowserRouter([
         path:"/category",
         element:<Category/>
       }
-    
     ],
   },
-]);
-//rendering in main root 'div' from index.html
+], {
+  basename: "/task_managment"
+});
+
 const root = createRoot(document.getElementById("root"));
 root.render(<RouterProvider router={appRouter} />);
-
-
