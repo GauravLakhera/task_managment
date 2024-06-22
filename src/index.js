@@ -1,17 +1,46 @@
 import React from 'react';
-import ReactDOM from 'react-dom/client';
+import ReactDOM, { createRoot } from 'react-dom/client';
 import './index.css';
 import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { RouterProvider, createBrowserRouter } from 'react-router-dom';
+import TaskList from './components/TaskList';
+import CreateTask from './components/CreateTask';
+import TaskDetail from './components/TaskDetail';
+import Category from "./components/Category"
+import EditTask from './components/EditTask';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>
-);
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+const appRouter = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    children: [
+      {
+        path: "/",
+        element: <TaskList />,
+      },
+      {
+        path: "/create",
+        element: <CreateTask />,
+      },
+      {
+        path: "/tasks/:id",
+        element: <TaskDetail />,
+      },
+      {
+        path: "/tasks/edit/:id",
+        element: <EditTask />,
+      },
+      {
+        path:"/category",
+        element:<Category/>
+      }
+    
+    ],
+  },
+]);
+//rendering in main root 'div' from index.html
+const root = createRoot(document.getElementById("root"));
+root.render(<RouterProvider router={appRouter} />);
+
+
